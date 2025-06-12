@@ -52,7 +52,7 @@ def create_project_structure():
     ]
     
     for init_file in init_files:
-        with open(init_file, "w") as f:
+        with open(init_file, "w", encoding='utf-8') as f:
             f.write("# Package initialization\n")
         print(f"✅ Created {init_file}")
 
@@ -72,7 +72,7 @@ def create_core_files():
     
     for core_file in core_files:
         if not os.path.exists(core_file):
-            with open(core_file, "w") as f:
+            with open(core_file, "w", encoding='utf-8') as f:
                 f.write(f'"""\n{core_file.split("/")[1]} module\nTODO: Add your existing code here\n"""\n\n')
             print(f"📝 Created template: {core_file}")
         else:
@@ -186,7 +186,7 @@ def create_data_files():
         }
     }
     
-    with open("data/technique_categories.json", "w") as f:
+    with open("data/technique_categories.json", "w", encoding='utf-8') as f:
         json.dump(technique_categories, f, indent=2)
     print("✅ Created data/technique_categories.json (VPLE-optimized)")
     
@@ -326,7 +326,7 @@ def create_data_files():
         }
     }
     
-    with open("data/attack_chains.json", "w") as f:
+    with open("data/attack_chains.json", "w", encoding='utf-8') as f:
         json.dump(attack_chains, f, indent=2)
     print("✅ Created data/attack_chains.json (VPLE-specific chains)")
     
@@ -421,7 +421,7 @@ def create_data_files():
         }
     }
     
-    with open("data/target_profiles.json", "w") as f:
+    with open("data/target_profiles.json", "w", encoding='utf-8') as f:
         json.dump(target_profiles, f, indent=2)
     print("✅ Created data/target_profiles.json (VPLE-specific profile)")
 
@@ -475,7 +475,7 @@ if __name__ == "__main__":
     main()
 '''
     
-    with open("examples/vple_complete_attack.py", "w") as f:
+    with open("examples/vple_complete_attack.py", "w", encoding='utf-8') as f:
         f.write(vple_example)
     print("✅ Created examples/vple_complete_attack.py")
     
@@ -516,7 +516,7 @@ if __name__ == "__main__":
     print(quick_start_vple())
 '''
     
-    with open("examples/quick_start_vple.py", "w") as f:
+    with open("examples/quick_start_vple.py", "w", encoding='utf-8') as f:
         f.write(quick_start)
     print("✅ Created examples/quick_start_vple.py")
 
@@ -554,7 +554,7 @@ flask>=2.0.0
 flask-cors>=3.0.0
 '''
     
-    with open("requirements.txt", "w") as f:
+    with open("requirements.txt", "w", encoding='utf-8') as f:
         f.write(requirements)
     print("✅ Created requirements.txt")
     
@@ -593,7 +593,7 @@ if __name__ == "__main__":
     main()
 '''
     
-    with open("setup.py", "w") as f:
+    with open("setup.py", "w", encoding='utf-8') as f:
         f.write(setup_script)
     print("✅ Created setup.py")
     
@@ -661,7 +661,7 @@ test: ## Test the installation
 	python -c "print('✅ Python working'); import yaml; print('✅ YAML working'); import pandas; print('✅ Pandas working')"
 '''
     
-    with open("Makefile", "w") as f:
+    with open("Makefile", "w", encoding='utf-8') as f:
         f.write(makefile)
     print("✅ Created Makefile (VPLE-optimized)")
 
@@ -772,7 +772,7 @@ atomic_orchestrator/
 Perfect for red team training and web application security learning!
 '''
     
-    with open("README.md", "w") as f:
+    with open("README.md", "w", encoding='utf-8') as f:
         f.write(readme)
     print("✅ Created README.md (VPLE-focused)")
 
@@ -821,7 +821,7 @@ Write-Host "🚀 Ready to execute Atomic Red Team techniques..." -ForegroundColo
 Write-Host "✅ VPLE attack chain template ready" -ForegroundColor Green
 '''
     
-    with open("templates/vple_attack_template.ps1", "w") as f:
+    with open("templates/vple_attack_template.ps1", "w", encoding='utf-8') as f:
         f.write(ps_template)
     print("✅ Created templates/vple_attack_template.ps1")
 
@@ -880,7 +880,7 @@ if __name__ == "__main__":
     main()
 '''
     
-    with open("main.py", "w") as f:
+    with open("main.py", "w", encoding='utf-8') as f:
         f.write(main_template)
     print("✅ Created main.py template")
 
