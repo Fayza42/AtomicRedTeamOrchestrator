@@ -1,0 +1,92 @@
+PS C:\Cir_Projet_3\atomic_orchestrator> python run_vple_attack.py --test-connection --ip 172.20.10.8
+🎯 VPLE Remote Attack Orchestrator
+Target: 172.20.10.8
+SSH: administrator:password
+🔍 Testing SSH connection...
+2025-07-16 15:27:35,588 - INFO - Connecting to VPLE VM at 172.20.10.8:22
+2025-07-16 15:27:35,654 - INFO - Connected (version 2.0, client OpenSSH_7.6p1)
+2025-07-16 15:27:35,764 - INFO - Authentication (password) successful!
+2025-07-16 15:27:35,827 - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-07-16 15:27:35,830 - INFO - ✅ SSH connection established successfully
+2025-07-16 15:27:35,830 - INFO - 🔧 Executing remote command: hostname
+2025-07-16 15:27:35,837 - INFO - ✅ Command executed successfully
+2025-07-16 15:27:35,837 - INFO - 🔧 Executing remote command: uname -r
+2025-07-16 15:27:35,890 - INFO - ✅ Command executed successfully
+2025-07-16 15:27:35,890 - INFO - 🔧 Executing remote command: hostname -I
+2025-07-16 15:27:35,937 - INFO - ✅ Command executed successfully
+2025-07-16 15:27:35,937 - INFO - 🔧 Executing remote command: netstat -tlnp | grep -E ':(1335|1336|1337|3000|8080|8800|8899)'
+2025-07-16 15:27:35,992 - INFO - ✅ Command executed successfully
+✅ SSH connection successful!
+Hostname: VPLE
+2025-07-16 15:27:35,993 - INFO - 🔧 Executing remote command: rm -rf /tmp/atomic_redteam
+2025-07-16 15:27:36,045 - INFO - ✅ Command executed successfully
+2025-07-16 15:27:36,045 - INFO - [chan 0] sftp session closed.
+2025-07-16 15:27:36,046 - INFO - SSH connection closed
+PS C:\Cir_Projet_3\atomic_orchestrator> python run_vple_attack.py  --ip 172.20.10.8                 
+🎯 VPLE Remote Attack Orchestrator
+Target: 172.20.10.8
+SSH: administrator:password
+🚀 Starting remote attack orchestration...
+2025-07-16 15:28:17,179 - INFO - Connecting to VPLE VM at 172.20.10.8:22
+2025-07-16 15:28:17,202 - INFO - Connected (version 2.0, client OpenSSH_7.6p1)
+2025-07-16 15:28:17,295 - INFO - Authentication (password) successful!
+2025-07-16 15:28:17,342 - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-07-16 15:28:17,345 - INFO - ✅ SSH connection established successfully
+
+🔍 Phase 1: Reconnaissance
+2025-07-16 15:28:17,346 - INFO - 🔧 Executing remote command: hostname
+2025-07-16 15:28:17,350 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:17,350 - INFO - 🔧 Executing remote command: uname -r
+2025-07-16 15:28:17,406 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:17,407 - INFO - 🔧 Executing remote command: hostname -I
+2025-07-16 15:28:17,458 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:17,458 - INFO - 🔧 Executing remote command: netstat -tlnp | grep -E ':(1335|1336|1337|3000|8080|8800|8899)'
+2025-07-16 15:28:17,509 - INFO - ✅ Command executed successfully
+Target system: VPLE
+
+🌐 Phase 2: Web Exploitation
+2025-07-16 15:28:17,510 - INFO - 🔧 Executing remote command: hostname -I | awk '{print $1}'
+2025-07-16 15:28:17,562 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:17,562 - INFO - 🔧 Executing remote command: curl -s -o /dev/null -w '%{http_code}' http://localhost:1335/
+2025-07-16 15:28:17,833 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:17,833 - INFO - 🔧 Executing remote command: curl -s -o /dev/null -w '%{http_code}' http://localhost:1336/
+2025-07-16 15:28:18,329 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:18,329 - INFO - 🔧 Executing remote command: curl -s -o /dev/null -w '%{http_code}' http://localhost:1337/
+2025-07-16 15:28:18,608 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:18,609 - INFO - 🔧 Executing remote command: curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/
+2025-07-16 15:28:18,807 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:18,807 - INFO - ✅ Web app on port 3000 is accessible
+2025-07-16 15:28:18,808 - INFO - 🔧 Executing remote command: curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/
+2025-07-16 15:28:19,034 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:19,034 - INFO - 🔧 Executing remote command: curl -s -o /dev/null -w '%{http_code}' http://localhost:8800/
+2025-07-16 15:28:19,221 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:19,221 - INFO - 🔧 Executing remote command: curl -s -o /dev/null -w '%{http_code}' http://localhost:8899/
+2025-07-16 15:28:19,322 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:19,323 - INFO - ✅ Web app on port 8899 is accessible
+✅ Web exploitation completed
+   Port 3000: accessible
+   Port 8899: accessible
+
+🐚 Phase 3: Shell Access
+2025-07-16 15:28:19,323 - INFO - 🔧 Executing remote command: whoami
+2025-07-16 15:28:19,397 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:19,397 - INFO - 🔧 Executing remote command: id
+2025-07-16 15:28:19,480 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:19,481 - INFO - 🔧 Executing remote command: pwd
+2025-07-16 15:28:19,531 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:19,532 - INFO - 🔧 Executing remote command: ls -la /tmp
+2025-07-16 15:28:19,581 - INFO - ✅ Command executed successfully
+✅ Shell access established
+
+⬆️ Phase 4: Privilege Escalation
+2025-07-16 15:28:19,582 - INFO - 🔧 Executing remote command: whoami
+2025-07-16 15:28:19,630 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:19,631 - INFO - 🔧 Executing remote command: find / -perm -4000 2>/dev/null | head -5
+2025-07-16 15:28:36,334 - INFO - ✅ Command executed successfully
+✅ Current user: administrator
+2025-07-16 15:28:36,335 - INFO - 🔧 Executing remote command: rm -rf /tmp/atomic_redteam
+2025-07-16 15:28:36,390 - INFO - ✅ Command executed successfully
+2025-07-16 15:28:36,390 - INFO - [chan 0] sftp session closed.
+2025-07-16 15:28:36,392 - INFO - SSH connection closed
+
+🎉 Remote attack orchestration complete!
