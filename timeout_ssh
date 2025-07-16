@@ -1,0 +1,55 @@
+def _capture_system_baseline(self):
+    """Capture initial system state for comparison with timeout handling"""
+    self.logger.info("📋 Capturing system baseline...")
+    
+    # Reduced baseline commands to prevent timeouts
+    baseline_commands = {
+        "system_info": {
+            "hostname": "hostname",
+            "kernel": "uname -r",
+            "os_release": "cat /etc/os-release | head -5",
+            "uptime": "uptime"
+        },
+        "network_info": {
+            "interfaces": "ip addr show | head -20",
+            "listening_ports": "netstat -tlnp | head -20"
+        },
+        "process_info": {
+            "processes": "ps aux | head -20",
+            "memory_usage": "free -h"
+        },
+        "security_info": {
+            "suid_files": "find / -perm -4000 2>/dev/null | head -10",
+            "users": "cat /etc/passwd | head -10"
+        },
+        "web_services": {
+            "web_ports": "netstat -tlnp | grep -E ':(80|443|8080|8800|8899|1335|1336|1337|3000)'"
+        }
+    }
+    
+    baseline = {}
+    for category, commands in baseline_commands.items():
+        baseline[category] = {}
+        self.logger.info(f"  Capturing {category}...")
+        
+        for key, command in commands.items():
+            try:
+                result = self.execute_command(command, timeout=30)  # Reduced timeout
+                baseline[category][key] = {
+                    "command": command,
+                    "success": result["success"],
+                    "output": result["stdout"][:1000] if result["success"] else result["stderr"][:1000],  # Limit output
+                    "timestamp": datetime.now().isoformat()
+                }
+            except Exception as e:
+                self.logger.warning(f"Baseline capture failed for {key}: {e}")
+                baseline[category][key] = {
+                    "command": command,
+                    "success": False,
+                    "output": f"Error: {str(e)}",
+                    "timestamp": datetime.now().isoformat()
+                }
+    
+    # Store baseline
+    self.attack_session["baseline"] = baseline
+    self.logger.info("✅ System baseline captured")
