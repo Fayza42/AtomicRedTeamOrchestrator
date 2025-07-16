@@ -1,0 +1,15 @@
+def get_system_info(self) -> Dict:
+    """Get VPLE VM system information"""
+    commands = {
+        "hostname": "hostname",
+        "kernel": "uname -r", 
+        "ip_address": "hostname -I",
+        "web_services": "netstat -tlnp | grep -E ':(1335|1336|1337|3000|8080|8800|8899)'"
+    }
+    
+    results = {}
+    for key, command in commands.items():
+        result = self.execute_command(command)
+        results[key] = {"success": result["success"], "output": result["stdout"].strip() if result["success"] else ""}
+    
+    return results
