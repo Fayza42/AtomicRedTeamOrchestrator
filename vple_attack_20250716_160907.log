@@ -1,0 +1,17 @@
+2025-07-16 16:09:07,122 - core.enhanced_ssh_executor - INFO - Connecting to VPLE VM at 172.20.10.8:22
+2025-07-16 16:09:07,143 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6p1)
+2025-07-16 16:09:07,201 - paramiko.transport - INFO - Authentication (password) successful!
+2025-07-16 16:09:07,248 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-07-16 16:09:07,259 - core.enhanced_ssh_executor - INFO -   Capturing system_info...
+2025-07-16 16:09:07,509 - core.enhanced_ssh_executor - INFO -   Capturing network_info...
+2025-07-16 16:09:07,711 - core.enhanced_ssh_executor - INFO -   Capturing process_info...
+2025-07-16 16:09:07,975 - core.enhanced_ssh_executor - INFO -   Capturing security_info...
+2025-07-16 16:09:09,814 - core.enhanced_ssh_executor - INFO -   Capturing web_services...
+2025-07-16 16:09:20,093 - paramiko.transport - ERROR - Socket exception: Une connexion existante a dû être fermée par l’hôte distant (10054)
+2025-07-16 16:09:20,094 - core.enhanced_ssh_executor - ERROR - Command execution failed: [WinError 10054] Une connexion existante a dû être fermée par l’hôte distant
+2025-07-16 16:09:20,877 - core.enhanced_ssh_executor - ERROR - Command execution failed: SSH session not active
+2025-07-16 16:09:20,881 - core.enhanced_ssh_executor - ERROR - Command execution failed: SSH session not active
+2025-07-16 16:09:20,885 - core.enhanced_ssh_executor - ERROR - Command execution failed: SSH session not active
+2025-07-16 16:09:20,886 - core.enhanced_ssh_executor - INFO - Evidence archived to: /tmp/evidence_archive_1752674960.tar.gz
+2025-07-16 16:09:20,886 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-07-16 16:09:20,886 - core.enhanced_ssh_executor - INFO - SSH connection closed
