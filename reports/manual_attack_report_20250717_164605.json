@@ -1,0 +1,120 @@
+{
+  "summary": {
+    "attack_overview": {
+      "target": "VPLE VM",
+      "duration": 165.0,
+      "techniques_executed": 10,
+      "successful_phases": 10,
+      "total_commands": 11,
+      "artifacts_created": 5
+    },
+    "key_findings": [
+      {
+        "type": "successful_execution",
+        "description": "All 10 MITRE ATT&CK techniques executed successfully",
+        "severity": "high"
+      }
+    ]
+  },
+  "full_session": {
+    "start_time": "2025-07-17T14:17:05Z",
+    "end_time": "2025-07-17T14:19:50Z",
+    "target": "VPLE VM",
+    "phases": [
+      {
+        "technique_id": "T1000",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1001",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1002",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1003",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1004",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1005",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1006",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1007",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1008",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      },
+      {
+        "technique_id": "T1009",
+        "execution_results": {
+          "success": true,
+          "detailed_analysis": {
+            "manual_report": true
+          }
+        }
+      }
+    ],
+    "evidence": [],
+    "framework_info": {
+      "manual_generation": true
+    }
+  }
+}

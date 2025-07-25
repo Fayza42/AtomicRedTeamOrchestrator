@@ -1,0 +1,233 @@
+2025-07-17 16:17:05,415 - __main__ - INFO -  Starting intelligent attack with objective: full_compromise
+2025-07-17 16:17:05,415 - __main__ - INFO -  Building intelligent attack chain for objective: full_compromise
+2025-07-17 16:17:05,415 - __main__ - INFO -  Categorizing real MITRE techniques for VPLE...
+2025-07-17 16:17:05,416 - __main__ - INFO -  Categorized 17 real techniques
+2025-07-17 16:17:05,417 - core.chain_builder - WARNING - Required category exfiltration not available for linux
+2025-07-17 16:17:05,417 - __main__ - INFO -  Built attack chain with 10 techniques
+2025-07-17 16:17:05,423 - core.real_atomic_executor - INFO -  Connecting to 172.20.10.8:22
+2025-07-17 16:17:05,437 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6p1)
+2025-07-17 16:17:05,492 - paramiko.transport - INFO - Authentication (password) successful!
+2025-07-17 16:17:05,539 - paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-07-17 16:17:05,590 - core.real_atomic_executor - INFO -  Initializing PowerShell session...
+2025-07-17 16:17:05,591 - core.real_atomic_executor - INFO -  Executing: which pwsh
+2025-07-17 16:17:05,635 - core.real_atomic_executor - INFO -  Command completed in 0.04s
+2025-07-17 16:17:05,636 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Write-Host "PowerShell Ready"'
+2025-07-17 16:17:06,159 - core.real_atomic_executor - INFO -  Command completed in 0.52s
+2025-07-17 16:17:06,159 - core.real_atomic_executor - INFO -  PowerShell session initialized
+2025-07-17 16:17:06,160 - core.real_atomic_executor - INFO -  Verifying Atomic Red Team framework...
+2025-07-17 16:17:06,160 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Get-Module -ListAvailable -Name invoke-atomicredteam'
+2025-07-17 16:17:06,881 - core.real_atomic_executor - INFO -  Command completed in 0.72s
+2025-07-17 16:17:06,882 - core.real_atomic_executor - INFO -  Invoke-AtomicRedTeam module found
+2025-07-17 16:17:06,882 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Get-Module invoke-atomicredteam | Select-Object Name, Version, ModuleBase'
+2025-07-17 16:17:08,051 - core.real_atomic_executor - INFO -  Command completed in 1.17s
+2025-07-17 16:17:08,051 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1082 -ShowDetailsBrief'
+2025-07-17 16:17:10,796 - core.real_atomic_executor - INFO -  Command completed in 2.75s
+2025-07-17 16:17:10,797 - core.real_atomic_executor - INFO -  Atomic Red Team framework verified and functional
+2025-07-17 16:17:10,797 - core.real_atomic_executor - INFO -  SSH connection and Atomic framework ready
+2025-07-17 16:17:10,798 - core.real_atomic_executor - INFO -  Executing attack chain with 10 techniques
+2025-07-17 16:17:10,798 - core.real_atomic_executor - INFO -  Step 1/10: T1190
+2025-07-17 16:17:10,799 - core.real_atomic_executor - INFO -  Executing technique: T1190
+2025-07-17 16:17:10,799 - core.real_atomic_executor - INFO -  Checking prerequisites for T1190
+2025-07-17 16:17:10,799 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1190 -CheckPrereqs'
+2025-07-17 16:17:12,107 - core.real_atomic_executor - INFO -  Command completed in 1.31s
+2025-07-17 16:17:12,107 - core.real_atomic_executor - WARNING -  Missing prerequisites for T1190: []
+2025-07-17 16:17:12,108 - core.real_atomic_executor - WARNING -  Prerequisites not met for T1190, attempting execution anyway...
+2025-07-17 16:17:12,108 - core.real_atomic_executor - INFO -  Getting details for T1190
+2025-07-17 16:17:12,109 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1190 -ShowDetailsBrief'
+2025-07-17 16:17:13,413 - core.real_atomic_executor - INFO -  Command completed in 1.30s
+2025-07-17 16:17:13,414 - core.real_atomic_executor - INFO -  Retrieved details for T1190
+2025-07-17 16:17:13,414 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1190 -TestNumbers 1'
+2025-07-17 16:17:13,414 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1190 -TestNumbers 1'
+2025-07-17 16:17:14,706 - core.real_atomic_executor - INFO -  Command completed in 1.29s
+2025-07-17 16:17:14,707 - core.real_atomic_executor - INFO - Technique T1190 executed successfully
+2025-07-17 16:17:14,707 - core.real_atomic_executor - INFO -  Cleaning up T1190
+2025-07-17 16:17:14,708 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1190 -Cleanup -TestNumbers 1'
+2025-07-17 16:17:15,997 - core.real_atomic_executor - INFO -  Command completed in 1.29s
+2025-07-17 16:17:15,998 - core.real_atomic_executor - INFO -  Cleanup completed for T1190
+2025-07-17 16:17:15,998 - core.real_atomic_executor - INFO -  Step 1 completed: T1190
+2025-07-17 16:17:15,998 - core.real_atomic_executor - INFO -  Waiting 5s before next technique...
+2025-07-17 16:17:20,999 - core.real_atomic_executor - INFO -  Step 2/10: T1059.004
+2025-07-17 16:17:21,000 - core.real_atomic_executor - INFO -  Executing technique: T1059.004
+2025-07-17 16:17:21,000 - core.real_atomic_executor - INFO -  Checking prerequisites for T1059.004
+2025-07-17 16:17:21,000 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1059.004 -CheckPrereqs'
+2025-07-17 16:17:23,912 - core.real_atomic_executor - INFO -  Command completed in 2.91s
+2025-07-17 16:17:23,912 - core.real_atomic_executor - INFO -  Prerequisites met for T1059.004
+2025-07-17 16:17:23,913 - core.real_atomic_executor - INFO -  Getting details for T1059.004
+2025-07-17 16:17:23,913 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1059.004 -ShowDetailsBrief'
+2025-07-17 16:17:26,211 - core.real_atomic_executor - INFO -  Command completed in 2.30s
+2025-07-17 16:17:26,212 - core.real_atomic_executor - INFO -  Retrieved details for T1059.004
+2025-07-17 16:17:26,212 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1059.004 -TestNumbers 1,2,3'
+2025-07-17 16:17:26,212 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1059.004 -TestNumbers 1,2,3'
+2025-07-17 16:17:32,058 - core.real_atomic_executor - INFO -  Command completed in 5.85s
+2025-07-17 16:17:32,058 - core.real_atomic_executor - INFO - Technique T1059.004 executed successfully
+2025-07-17 16:17:32,059 - core.real_atomic_executor - INFO -  Cleaning up T1059.004
+2025-07-17 16:17:32,060 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1059.004 -Cleanup -TestNumbers 1,2,3'
+2025-07-17 16:17:34,812 - core.real_atomic_executor - INFO -  Command completed in 2.75s
+2025-07-17 16:17:34,813 - core.real_atomic_executor - INFO -  Cleanup completed for T1059.004
+2025-07-17 16:17:34,813 - core.real_atomic_executor - INFO -  Step 2 completed: T1059.004
+2025-07-17 16:17:34,814 - core.real_atomic_executor - INFO -  Waiting 5s before next technique...
+2025-07-17 16:17:39,815 - core.real_atomic_executor - INFO -  Step 3/10: T1547.006
+2025-07-17 16:17:39,815 - core.real_atomic_executor - INFO -  Executing technique: T1547.006
+2025-07-17 16:17:39,815 - core.real_atomic_executor - INFO -  Checking prerequisites for T1547.006
+2025-07-17 16:17:39,816 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1547.006 -CheckPrereqs'
+2025-07-17 16:17:41,932 - core.real_atomic_executor - INFO -  Command completed in 2.12s
+2025-07-17 16:17:41,933 - core.real_atomic_executor - WARNING -  Missing prerequisites for T1547.006: []
+2025-07-17 16:17:41,933 - core.real_atomic_executor - WARNING -  Prerequisites not met for T1547.006, attempting execution anyway...
+2025-07-17 16:17:41,934 - core.real_atomic_executor - INFO -  Getting details for T1547.006
+2025-07-17 16:17:41,934 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1547.006 -ShowDetailsBrief'
+2025-07-17 16:17:43,892 - core.real_atomic_executor - INFO -  Command completed in 1.96s
+2025-07-17 16:17:43,893 - core.real_atomic_executor - INFO -  Retrieved details for T1547.006
+2025-07-17 16:17:43,893 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1547.006 -TestNumbers 1'
+2025-07-17 16:17:43,893 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1547.006 -TestNumbers 1'
+2025-07-17 16:17:46,069 - core.real_atomic_executor - INFO -  Command completed in 2.17s
+2025-07-17 16:17:46,069 - core.real_atomic_executor - INFO - Technique T1547.006 executed successfully
+2025-07-17 16:17:46,070 - core.real_atomic_executor - INFO -  Cleaning up T1547.006
+2025-07-17 16:17:46,070 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1547.006 -Cleanup -TestNumbers 1'
+2025-07-17 16:17:48,233 - core.real_atomic_executor - INFO -  Command completed in 2.16s
+2025-07-17 16:17:48,233 - core.real_atomic_executor - INFO -  Cleanup completed for T1547.006
+2025-07-17 16:17:48,234 - core.real_atomic_executor - INFO -  Step 3 completed: T1547.006
+2025-07-17 16:17:48,235 - core.real_atomic_executor - INFO -  Waiting 15s before next technique...
+2025-07-17 16:18:03,235 - core.real_atomic_executor - INFO -  Step 4/10: T1548.001
+2025-07-17 16:18:03,236 - core.real_atomic_executor - INFO -  Executing technique: T1548.001
+2025-07-17 16:18:03,236 - core.real_atomic_executor - INFO -  Checking prerequisites for T1548.001
+2025-07-17 16:18:03,236 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1548.001 -CheckPrereqs'
+2025-07-17 16:18:05,356 - core.real_atomic_executor - INFO -  Command completed in 2.12s
+2025-07-17 16:18:05,356 - core.real_atomic_executor - INFO -  Prerequisites met for T1548.001
+2025-07-17 16:18:05,356 - core.real_atomic_executor - INFO -  Getting details for T1548.001
+2025-07-17 16:18:05,357 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1548.001 -ShowDetailsBrief'
+2025-07-17 16:18:07,346 - core.real_atomic_executor - INFO -  Command completed in 1.99s
+2025-07-17 16:18:07,347 - core.real_atomic_executor - INFO -  Retrieved details for T1548.001
+2025-07-17 16:18:07,347 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1548.001 -TestNumbers 1,2'
+2025-07-17 16:18:07,348 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1548.001 -TestNumbers 1,2'
+2025-07-17 16:18:09,820 - core.real_atomic_executor - INFO -  Command completed in 2.47s
+2025-07-17 16:18:09,820 - core.real_atomic_executor - INFO - Technique T1548.001 executed successfully
+2025-07-17 16:18:09,821 - core.real_atomic_executor - INFO -  Cleaning up T1548.001
+2025-07-17 16:18:09,821 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1548.001 -Cleanup -TestNumbers 1,2'
+2025-07-17 16:18:12,054 - core.real_atomic_executor - INFO -  Command completed in 2.23s
+2025-07-17 16:18:12,055 - core.real_atomic_executor - INFO -  Cleanup completed for T1548.001
+2025-07-17 16:18:12,055 - core.real_atomic_executor - INFO -  Step 4 completed: T1548.001
+2025-07-17 16:18:12,056 - core.real_atomic_executor - INFO -  Waiting 10s before next technique...
+2025-07-17 16:18:22,057 - core.real_atomic_executor - INFO -  Step 5/10: T1070.004
+2025-07-17 16:18:22,057 - core.real_atomic_executor - INFO -  Executing technique: T1070.004
+2025-07-17 16:18:22,057 - core.real_atomic_executor - INFO -  Checking prerequisites for T1070.004
+2025-07-17 16:18:22,058 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1070.004 -CheckPrereqs'
+2025-07-17 16:18:24,676 - core.real_atomic_executor - INFO -  Command completed in 2.62s
+2025-07-17 16:18:24,677 - core.real_atomic_executor - INFO -  Prerequisites met for T1070.004
+2025-07-17 16:18:24,677 - core.real_atomic_executor - INFO -  Getting details for T1070.004
+2025-07-17 16:18:24,677 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1070.004 -ShowDetailsBrief'
+2025-07-17 16:18:26,915 - core.real_atomic_executor - INFO -  Command completed in 2.24s
+2025-07-17 16:18:26,916 - core.real_atomic_executor - INFO -  Retrieved details for T1070.004
+2025-07-17 16:18:26,916 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1070.004 -TestNumbers 1,2'
+2025-07-17 16:18:26,917 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1070.004 -TestNumbers 1,2'
+2025-07-17 16:18:29,415 - core.real_atomic_executor - INFO -  Command completed in 2.50s
+2025-07-17 16:18:29,416 - core.real_atomic_executor - INFO - Technique T1070.004 executed successfully
+2025-07-17 16:18:29,416 - core.real_atomic_executor - INFO -  Cleaning up T1070.004
+2025-07-17 16:18:29,417 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1070.004 -Cleanup -TestNumbers 1,2'
+2025-07-17 16:18:31,524 - core.real_atomic_executor - INFO -  Command completed in 2.11s
+2025-07-17 16:18:31,524 - core.real_atomic_executor - INFO -  Cleanup completed for T1070.004
+2025-07-17 16:18:31,525 - core.real_atomic_executor - INFO -  Step 5 completed: T1070.004
+2025-07-17 16:18:31,525 - core.real_atomic_executor - INFO -  Waiting 5s before next technique...
+2025-07-17 16:18:36,526 - core.real_atomic_executor - INFO -  Step 6/10: T1003.008
+2025-07-17 16:18:36,526 - core.real_atomic_executor - INFO -  Executing technique: T1003.008
+2025-07-17 16:18:36,526 - core.real_atomic_executor - INFO -  Checking prerequisites for T1003.008
+2025-07-17 16:18:36,527 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1003.008 -CheckPrereqs'
+2025-07-17 16:18:38,460 - core.real_atomic_executor - INFO -  Command completed in 1.93s
+2025-07-17 16:18:38,461 - core.real_atomic_executor - INFO -  Prerequisites met for T1003.008
+2025-07-17 16:18:38,461 - core.real_atomic_executor - INFO -  Getting details for T1003.008
+2025-07-17 16:18:38,461 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1003.008 -ShowDetailsBrief'
+2025-07-17 16:18:40,443 - core.real_atomic_executor - INFO -  Command completed in 1.98s
+2025-07-17 16:18:40,443 - core.real_atomic_executor - INFO -  Retrieved details for T1003.008
+2025-07-17 16:18:40,444 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1003.008 -TestNumbers 1,2'
+2025-07-17 16:18:40,444 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1003.008 -TestNumbers 1,2'
+2025-07-17 16:18:42,627 - core.real_atomic_executor - INFO -  Command completed in 2.18s
+2025-07-17 16:18:42,627 - core.real_atomic_executor - INFO - Technique T1003.008 executed successfully
+2025-07-17 16:18:42,628 - core.real_atomic_executor - INFO -  Cleaning up T1003.008
+2025-07-17 16:18:42,628 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1003.008 -Cleanup -TestNumbers 1,2'
+2025-07-17 16:18:44,778 - core.real_atomic_executor - INFO -  Command completed in 2.15s
+2025-07-17 16:18:44,779 - core.real_atomic_executor - INFO -  Cleanup completed for T1003.008
+2025-07-17 16:18:44,779 - core.real_atomic_executor - INFO -  Step 6 completed: T1003.008
+2025-07-17 16:18:44,780 - core.real_atomic_executor - INFO -  Waiting 8s before next technique...
+2025-07-17 16:18:52,780 - core.real_atomic_executor - INFO -  Step 7/10: T1082
+2025-07-17 16:18:52,781 - core.real_atomic_executor - INFO -  Executing technique: T1082
+2025-07-17 16:18:52,781 - core.real_atomic_executor - INFO -  Checking prerequisites for T1082
+2025-07-17 16:18:52,781 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1082 -CheckPrereqs'
+2025-07-17 16:19:03,192 - core.real_atomic_executor - INFO -  Command completed in 10.41s
+2025-07-17 16:19:03,192 - core.real_atomic_executor - INFO -  Prerequisites met for T1082
+2025-07-17 16:19:03,193 - core.real_atomic_executor - INFO -  Getting details for T1082
+2025-07-17 16:19:03,193 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1082 -ShowDetailsBrief'
+2025-07-17 16:19:05,590 - core.real_atomic_executor - INFO -  Command completed in 2.40s
+2025-07-17 16:19:05,590 - core.real_atomic_executor - INFO -  Retrieved details for T1082
+2025-07-17 16:19:05,591 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1082 -TestNumbers 1,2,3'
+2025-07-17 16:19:05,591 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1082 -TestNumbers 1,2,3'
+2025-07-17 16:19:07,491 - core.real_atomic_executor - INFO -  Command completed in 1.90s
+2025-07-17 16:19:07,492 - core.real_atomic_executor - INFO - Technique T1082 executed successfully
+2025-07-17 16:19:07,492 - core.real_atomic_executor - INFO -  Cleaning up T1082
+2025-07-17 16:19:07,492 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1082 -Cleanup -TestNumbers 1,2,3'
+2025-07-17 16:19:09,294 - core.real_atomic_executor - INFO -  Command completed in 1.80s
+2025-07-17 16:19:09,295 - core.real_atomic_executor - INFO -  Cleanup completed for T1082
+2025-07-17 16:19:09,295 - core.real_atomic_executor - INFO -  Step 7 completed: T1082
+2025-07-17 16:19:09,295 - core.real_atomic_executor - INFO -  Waiting 3s before next technique...
+2025-07-17 16:19:12,295 - core.real_atomic_executor - INFO -  Step 8/10: T1083
+2025-07-17 16:19:12,296 - core.real_atomic_executor - INFO -  Executing technique: T1083
+2025-07-17 16:19:12,296 - core.real_atomic_executor - INFO -  Checking prerequisites for T1083
+2025-07-17 16:19:12,297 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1083 -CheckPrereqs'
+2025-07-17 16:19:14,286 - core.real_atomic_executor - INFO -  Command completed in 1.99s
+2025-07-17 16:19:14,287 - core.real_atomic_executor - INFO -  Prerequisites met for T1083
+2025-07-17 16:19:14,287 - core.real_atomic_executor - INFO -  Getting details for T1083
+2025-07-17 16:19:14,287 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1083 -ShowDetailsBrief'
+2025-07-17 16:19:16,285 - core.real_atomic_executor - INFO -  Command completed in 2.00s
+2025-07-17 16:19:16,285 - core.real_atomic_executor - INFO -  Retrieved details for T1083
+2025-07-17 16:19:16,285 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1083 -TestNumbers 1,2'
+2025-07-17 16:19:16,286 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1083 -TestNumbers 1,2'
+2025-07-17 16:19:18,399 - core.real_atomic_executor - INFO -  Command completed in 2.11s
+2025-07-17 16:19:18,400 - core.real_atomic_executor - INFO - Technique T1083 executed successfully
+2025-07-17 16:19:18,400 - core.real_atomic_executor - INFO -  Cleaning up T1083
+2025-07-17 16:19:18,400 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1083 -Cleanup -TestNumbers 1,2'
+2025-07-17 16:19:20,499 - core.real_atomic_executor - INFO -  Command completed in 2.10s
+2025-07-17 16:19:20,500 - core.real_atomic_executor - INFO -  Cleanup completed for T1083
+2025-07-17 16:19:20,500 - core.real_atomic_executor - INFO -  Step 8 completed: T1083
+2025-07-17 16:19:20,501 - core.real_atomic_executor - INFO -  Waiting 3s before next technique...
+2025-07-17 16:19:23,502 - core.real_atomic_executor - INFO -  Step 9/10: T1021.004
+2025-07-17 16:19:23,502 - core.real_atomic_executor - INFO -  Executing technique: T1021.004
+2025-07-17 16:19:23,503 - core.real_atomic_executor - INFO -  Checking prerequisites for T1021.004
+2025-07-17 16:19:23,503 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1021.004 -CheckPrereqs'
+2025-07-17 16:19:25,357 - core.real_atomic_executor - INFO -  Command completed in 1.85s
+2025-07-17 16:19:25,358 - core.real_atomic_executor - WARNING -  Missing prerequisites for T1021.004: []
+2025-07-17 16:19:25,358 - core.real_atomic_executor - WARNING -  Prerequisites not met for T1021.004, attempting execution anyway...
+2025-07-17 16:19:25,359 - core.real_atomic_executor - INFO -  Getting details for T1021.004
+2025-07-17 16:19:25,359 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1021.004 -ShowDetailsBrief'
+2025-07-17 16:19:27,245 - core.real_atomic_executor - INFO -  Command completed in 1.89s
+2025-07-17 16:19:27,245 - core.real_atomic_executor - INFO -  Retrieved details for T1021.004
+2025-07-17 16:19:27,246 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1021.004 -TestNumbers 1'
+2025-07-17 16:19:27,246 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1021.004 -TestNumbers 1'
+2025-07-17 16:19:29,152 - core.real_atomic_executor - INFO -  Command completed in 1.91s
+2025-07-17 16:19:29,152 - core.real_atomic_executor - INFO - Technique T1021.004 executed successfully
+2025-07-17 16:19:29,153 - core.real_atomic_executor - INFO -  Cleaning up T1021.004
+2025-07-17 16:19:29,153 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1021.004 -Cleanup -TestNumbers 1'
+2025-07-17 16:19:31,058 - core.real_atomic_executor - INFO -  Command completed in 1.90s
+2025-07-17 16:19:31,059 - core.real_atomic_executor - INFO -  Cleanup completed for T1021.004
+2025-07-17 16:19:31,059 - core.real_atomic_executor - INFO -  Step 9 completed: T1021.004
+2025-07-17 16:19:31,059 - core.real_atomic_executor - INFO -  Waiting 12s before next technique...
+2025-07-17 16:19:43,061 - core.real_atomic_executor - INFO -  Step 10/10: T1005
+2025-07-17 16:19:43,061 - core.real_atomic_executor - INFO -  Executing technique: T1005
+2025-07-17 16:19:43,062 - core.real_atomic_executor - INFO -  Checking prerequisites for T1005
+2025-07-17 16:19:43,062 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1005 -CheckPrereqs'
+2025-07-17 16:19:45,103 - core.real_atomic_executor - INFO -  Command completed in 2.04s
+2025-07-17 16:19:45,104 - core.real_atomic_executor - WARNING -  Missing prerequisites for T1005: []
+2025-07-17 16:19:45,104 - core.real_atomic_executor - WARNING -  Prerequisites not met for T1005, attempting execution anyway...
+2025-07-17 16:19:45,105 - core.real_atomic_executor - INFO -  Getting details for T1005
+2025-07-17 16:19:45,105 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1005 -ShowDetailsBrief'
+2025-07-17 16:19:46,978 - core.real_atomic_executor - INFO -  Command completed in 1.87s
+2025-07-17 16:19:46,979 - core.real_atomic_executor - INFO -  Retrieved details for T1005
+2025-07-17 16:19:46,979 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1005 -TestNumbers 1'
+2025-07-17 16:19:46,980 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1005 -TestNumbers 1'
+2025-07-17 16:19:48,853 - core.real_atomic_executor - INFO -  Command completed in 1.87s
+2025-07-17 16:19:48,854 - core.real_atomic_executor - INFO - Technique T1005 executed successfully
+2025-07-17 16:19:48,854 - core.real_atomic_executor - INFO -  Cleaning up T1005
+2025-07-17 16:19:48,854 - core.real_atomic_executor - INFO -  Executing: pwsh -Command 'Import-Module invoke-atomicredteam; Invoke-AtomicTest T1005 -Cleanup -TestNumbers 1'
+2025-07-17 16:19:50,742 - core.real_atomic_executor - INFO -  Command completed in 1.89s
+2025-07-17 16:19:50,743 - core.real_atomic_executor - INFO -  Cleanup completed for T1005
+2025-07-17 16:19:50,743 - core.real_atomic_executor - INFO -  Step 10 completed: T1005
+2025-07-17 16:19:50,743 - core.real_atomic_executor - INFO -  Attack chain completed: 10/10 successful
+2025-07-17 16:19:50,744 - paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+2025-07-17 16:19:50,763 - core.real_atomic_executor - INFO -  SSH connection closed

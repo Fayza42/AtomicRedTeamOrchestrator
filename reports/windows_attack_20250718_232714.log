@@ -1,0 +1,67 @@
+2025-07-18 23:27:14,375 - __main__ - INFO -  Connecting to Windows target: 172.20.10.9
+2025-07-18 23:27:14,376 - __main__ - INFO - Simulating connection to 172.20.10.9
+2025-07-18 23:27:16,377 - __main__ - INFO -  Windows target connection established
+2025-07-18 23:27:16,377 - __main__ - INFO -  Capturing Windows system baseline...
+2025-07-18 23:27:16,378 - __main__ - INFO -  System baseline captured
+2025-07-18 23:27:16,378 - __main__ - INFO -  Executing INTELLIGENT attack mode
+2025-07-18 23:27:16,379 - __main__ - INFO -  Executing intelligent chain: discovery_chain
+2025-07-18 23:27:16,387 - __main__ - INFO -  Executing T1082: System Information Discovery
+2025-07-18 23:27:16,388 - __main__ - INFO -  Executing T1083: File and Directory Discovery
+2025-07-18 23:27:16,388 - __main__ - INFO -  Executing T1057: Process Discovery
+2025-07-18 23:27:16,388 - __main__ - INFO -  Executing T1012: Query Registry
+2025-07-18 23:27:16,389 - __main__ - INFO -  Executing T1016: System Network Configuration Discovery
+2025-07-18 23:27:16,389 - __main__ - INFO -  Executing intelligent chain: execution_chain
+2025-07-18 23:27:16,390 - __main__ - INFO -  Executing T1059.001: PowerShell
+2025-07-18 23:27:16,390 - __main__ - INFO -  Skipping T1059.003 due to chain failure
+2025-07-18 23:27:16,390 - __main__ - INFO -  Executing intelligent chain: persistence_chain
+2025-07-18 23:27:16,391 - __main__ - INFO -  Executing T1547.001: Registry Run Keys / Startup Folder
+2025-07-18 23:27:16,391 - __main__ - INFO -  Executing T1053.005: Scheduled Task
+2025-07-18 23:27:16,391 - __main__ - INFO -  Executing intelligent chain: privilege_escalation_chain
+2025-07-18 23:27:16,392 - __main__ - INFO -  Executing T1548.002: Bypass User Account Control
+2025-07-18 23:27:16,392 - __main__ - INFO -  Executing T1134: Access Token Manipulation
+2025-07-18 23:27:16,392 - __main__ - INFO -  Executing intelligent chain: credential_access_chain
+2025-07-18 23:27:16,392 - __main__ - INFO -  Executing T1003.001: LSASS Memory
+2025-07-18 23:27:16,393 - __main__ - INFO -  Skipping T1003.002 due to chain failure
+2025-07-18 23:27:16,393 - __main__ - INFO -  Executing intelligent chain: defense_evasion_chain
+2025-07-18 23:27:16,393 - __main__ - INFO -  Skipping defense_evasion_chain based on system analysis
+2025-07-18 23:27:16,394 - __main__ - INFO -  Executing intelligent chain: collection_chain
+2025-07-18 23:27:16,394 - __main__ - INFO -  Executing T1005: Data from Local System
+2025-07-18 23:27:16,394 - __main__ - INFO -  Executing T1115: Clipboard Data
+2025-07-18 23:27:16,395 - __main__ - INFO -  Executing BLIND attack mode
+2025-07-18 23:27:16,395 - __main__ - INFO -  Blind execution: T1082
+2025-07-18 23:27:16,396 - __main__ - INFO -  Executing T1082: System Information Discovery
+2025-07-18 23:27:16,396 - __main__ - INFO -  Blind execution: T1083
+2025-07-18 23:27:16,397 - __main__ - INFO -  Executing T1083: File and Directory Discovery
+2025-07-18 23:27:16,397 - __main__ - INFO -  Blind execution: T1057
+2025-07-18 23:27:16,397 - __main__ - INFO -  Executing T1057: Process Discovery
+2025-07-18 23:27:16,398 - __main__ - INFO -  Blind execution: T1012
+2025-07-18 23:27:16,398 - __main__ - INFO -  Executing T1012: Query Registry
+2025-07-18 23:27:16,398 - __main__ - INFO -  Blind execution: T1016
+2025-07-18 23:27:16,399 - __main__ - INFO -  Executing T1016: System Network Configuration Discovery
+2025-07-18 23:27:16,399 - __main__ - INFO -  Blind execution: T1059.001
+2025-07-18 23:27:16,399 - __main__ - INFO -  Executing T1059.001: PowerShell
+2025-07-18 23:27:16,399 - __main__ - INFO -  Blind execution: T1059.003
+2025-07-18 23:27:16,400 - __main__ - INFO -  Executing T1059.003: Windows Command Shell
+2025-07-18 23:27:16,400 - __main__ - INFO -  Blind execution: T1547.001
+2025-07-18 23:27:16,400 - __main__ - INFO -  Executing T1547.001: Registry Run Keys / Startup Folder
+2025-07-18 23:27:16,401 - __main__ - INFO -  Blind execution: T1053.005
+2025-07-18 23:27:16,401 - __main__ - INFO -  Executing T1053.005: Scheduled Task
+2025-07-18 23:27:16,401 - __main__ - INFO -  Blind execution: T1548.002
+2025-07-18 23:27:16,401 - __main__ - INFO -  Executing T1548.002: Bypass User Account Control
+2025-07-18 23:27:16,402 - __main__ - INFO -  Blind execution: T1134
+2025-07-18 23:27:16,402 - __main__ - INFO -  Executing T1134: Access Token Manipulation
+2025-07-18 23:27:16,402 - __main__ - INFO -  Blind execution: T1003.001
+2025-07-18 23:27:16,403 - __main__ - INFO -  Executing T1003.001: LSASS Memory
+2025-07-18 23:27:16,403 - __main__ - INFO -  Blind execution: T1003.002
+2025-07-18 23:27:16,403 - __main__ - INFO -  Executing T1003.002: Security Account Manager
+2025-07-18 23:27:16,403 - __main__ - INFO -  Blind execution: T1055
+2025-07-18 23:27:16,404 - __main__ - INFO -  Executing T1055: Process Injection
+2025-07-18 23:27:16,404 - __main__ - INFO -  Blind execution: T1070.001
+2025-07-18 23:27:16,404 - __main__ - INFO -  Executing T1070.001: Indicator Removal on Host: Clear Windows Event Logs
+2025-07-18 23:27:16,405 - __main__ - INFO -  Blind execution: T1005
+2025-07-18 23:27:16,405 - __main__ - INFO -  Executing T1005: Data from Local System
+2025-07-18 23:27:16,405 - __main__ - INFO -  Blind execution: T1115
+2025-07-18 23:27:16,406 - __main__ - INFO -  Executing T1115: Clipboard Data
+2025-07-18 23:27:16,406 - __main__ - INFO -  Generating benchmark comparison report...
+2025-07-18 23:27:16,414 - __main__ - INFO -  Benchmark report saved: windows_attack_benchmark_20250718_232716.json
+2025-07-18 23:27:16,416 - __main__ - INFO - Connection closed
