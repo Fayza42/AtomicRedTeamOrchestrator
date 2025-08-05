@@ -298,8 +298,8 @@ for i, pattern in enumerate(mitre_patterns):
 print(f"✓ Total documents created: {len(documents_content)}")
 
 # %%
-# Step 6: Add VPLE Target Information (Minimal and Unbiased)
-print("Adding minimal VPLE target system information...")
+# Step 6: Add VPLE Target Information
+print("Adding VPLE target system information...")
 
 # Minimal VPLE system information (not biased toward specific techniques)
 vple_system_info = """
@@ -340,17 +340,18 @@ ACCESS INFORMATION:
 # Add VPLE info to documents
 documents_content.append(vple_system_info)
 
-print(f"✓ Added VPLE target information")
 print(f"✓ Final document count: {len(documents_content)}")
 
-# Optional: Save complete knowledge base for reference
-try:
-    with open("complete_attack_knowledge.txt", 'w', encoding='utf-8') as f:
-        f.write('\n\n' + '='*80 + '\n\n'.join(documents_content))
-    print("✓ Complete knowledge base saved to complete_attack_knowledge.txt")
-except Exception as e:
-    print(f"⚠ Could not save knowledge base file: {e}")
+# Save documents to files for reference
+knowledge_files = {
+    "complete_attack_patterns.txt": '\n\n' + '='*80 + '\n\n'.join(documents_content)
+}
 
+for filename, content in knowledge_files.items():
+    file_path = knowledge_dir / filename
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+    print(f"✓ Saved: {filename}")
 
 # %%
 # Step 6: Write Knowledge Files
@@ -475,123 +476,85 @@ for doc_type, count in doc_types.items():
 print(f"\n✓ Total chunks ready for embeddings: {len(docs)}")
 
 # %%
-# Step 8: Create Vector Store with Persistence Check
-print("Creating vector store with complete CAPEC/MITRE knowledge...")
-
-import os
-import shutil
-from pathlib import Path
-
-# Option to force recreation of the vector database
-FORCE_RECREATE = False  # Set to True to rebuild the database from scratch
-
-# Check if vector database already exists
-chroma_db_path = Path("./vple_chroma_db")
-vector_store_exists = chroma_db_path.exists() and any(chroma_db_path.iterdir()) and not FORCE_RECREATE
-
-if FORCE_RECREATE and chroma_db_path.exists():
-    print("🔄 Force recreate enabled - removing existing database...")
-    shutil.rmtree(chroma_db_path)
-    vector_store_exists = False
+# Step 9: Create Vector Store
+print("Creating vector embeddings...")
 
 try:
     # Initialize embeddings with the same model
     embeddings = OllamaEmbeddings(model=model_name)
     
-    if vector_store_exists:
-        print("✓ Existing vector database found - loading from disk...")
-        # Load existing vector store
-        vectorstore = Chroma(
-            persist_directory="./vple_chroma_db",
-            embedding_function=embeddings
-        )
-        
-        # Verify the database has content
-        try:
-            test_results = vectorstore.similarity_search("attack patterns", k=1)
-            if test_results:
-                print(f"✓ Loaded existing vector store with content")
-                print(f"✓ Skipping re-indexing (using cached embeddings)")
-                
-                # Quick verification of database content
-                capec_test = vectorstore.similarity_search("CAPEC attack", k=1)
-                mitre_test = vectorstore.similarity_search("MITRE ATT&CK", k=1)
-                if capec_test and mitre_test:
-                    print("✓ Database contains both CAPEC and MITRE content")
-                else:
-                    print("⚠ Database missing CAPEC/MITRE content - rebuilding...")
-                    vector_store_exists = False
-            else:
-                print("⚠ Existing database is empty - rebuilding...")
-                vector_store_exists = False
-        except:
-            print("⚠ Existing database corrupted - rebuilding...")
-            vector_store_exists = False
+    # Create vector store
+    vectorstore = Chroma.from_documents(
+        documents=docs,
+        embedding=embeddings,
+        persist_directory="./vple_chroma_db"
+    )
     
-    if not vector_store_exists:
-        print("Creating new vector store from complete knowledge base...")
-        print("⏳ This may take 5-10 minutes for the complete CAPEC/MITRE database...")
-        print("    Please be patient while processing thousands of attack patterns...")
-        
-        # Create vector store from our processed documents
-        vectorstore = Chroma.from_documents(
-            documents=docs,  # Use the docs we created in Step 7
-            embedding=embeddings,
-            persist_directory="./vple_chroma_db"
-        )
-        
-        print("✓ New vector store created and persisted to disk")
+    print("✓ Vector store created successfully")
+    print(f"✓ Stored {len(docs)} chunks in ChromaDB")
     
-    print(f"✓ Vector store ready with {len(docs)} total chunks")
+    # Test similarity search
+    test_query = "web application vulnerabilities"
+    similar_docs = vectorstore.similarity_search(test_query, k=3)
     
-    # Test similarity search with Red Team queries
-    test_queries = [
-        "web application attack patterns",
-        "SQL injection techniques", 
-        "command execution methods",
-        "privilege escalation attacks"
-    ]
-    
-    print("\nTesting vector search with Red Team queries:")
-    for query in test_queries:
-        similar_docs = vectorstore.similarity_search(query, k=3)
-        doc_types = [doc.metadata.get("doc_type", "unknown") for doc in similar_docs]
-        unique_types = set(doc_types)
-        print(f"  '{query}': Found {len(similar_docs)} docs, types: {unique_types}")
-    
-    # Display database statistics
-    print(f"\nVector Database Statistics:")
-    print(f"  Location: ./vple_chroma_db")
-    print(f"  Total chunks: {len(docs)}")
-    print(f"  CAPEC patterns: {len(capec_patterns)}")
-    print(f"  MITRE techniques: {len(mitre_patterns)}")
-    
-    # Calculate database size
-    try:
-        db_size = sum(f.stat().st_size for f in chroma_db_path.rglob('*') if f.is_file()) / 1024 / 1024
-        print(f"  Database size: {db_size:.1f}MB")
-    except:
-        print(f"  Database size: Could not calculate")
-    
-    print(f"\n💡 Tip: To force database recreation, set FORCE_RECREATE = True in this cell")
+    print(f"\nTest query: '{test_query}'")
+    print(f"Found {len(similar_docs)} similar documents")
+    print(f"Top result preview: {similar_docs[0].page_content[:150]}...")
     
 except Exception as e:
     print(f"✗ Vector store creation failed: {e}")
-    print("Check that Ollama is running and the model is available")
-    print("You may need to restart Ollama: pkill -f ollama && ollama serve &")
     exit(1)
 
 # %%
-# Step 9: Update Configuration with Complete Knowledge Base
+# Step 8: Create Vector Store with Complete Attack Pattern Database
+print("Creating vector embeddings from complete CAPEC/MITRE database...")
+
+try:
+    # Initialize embeddings with the same model
+    embeddings = OllamaEmbeddings(model=model_name)
+    
+    # Create vector store from processed documents
+    vectorstore = Chroma.from_documents(
+        documents=docs,
+        embedding=embeddings,
+        persist_directory="./vple_chroma_db"
+    )
+    
+    print("✓ Vector store created successfully")
+    print(f"✓ Stored {len(docs)} chunks in ChromaDB")
+    
+    # Test similarity search with attack-focused query
+    test_query = "web application attack techniques for Linux systems"
+    similar_docs = vectorstore.similarity_search(test_query, k=5)
+    
+    print(f"\nTest query: '{test_query}'")
+    print(f"Found {len(similar_docs)} relevant documents")
+    
+    # Show diversity of results
+    result_types = {}
+    for doc in similar_docs:
+        doc_type = doc.metadata.get("doc_type", "unknown")
+        result_types[doc_type] = result_types.get(doc_type, 0) + 1
+    
+    print(f"Result diversity: {result_types}")
+    print(f"Top result preview: {similar_docs[0].page_content[:200]}...")
+    
+except Exception as e:
+    print(f"✗ Vector store creation failed: {e}")
+    exit(1)
+
+# %%
+# Step 10: Update Configuration with Complete Knowledge Base
 config["rag_setup"] = {
     "knowledge_type": "Complete CAPEC + MITRE ATT&CK Database",
     "capec_patterns": len(capec_patterns),
-    "mitre_patterns": len(mitre_patterns), 
+    "mitre_patterns": len(mitre_patterns),
     "total_attack_patterns": len(capec_patterns) + len(mitre_patterns),
+    "knowledge_dir": str(knowledge_dir),
     "vector_db": "./vple_chroma_db", 
     "chunks_created": len(docs),
     "data_sources": ["CAPEC via STIX 2.x", "MITRE ATT&CK Enterprise", "VPLE System Info"],
-    "approach": "Unbiased complete database - Red Team Agent must choose techniques autonomously",
+    "approach": "Unbiased complete database - LLM must choose techniques autonomously",
     "setup_timestamp": datetime.now().isoformat()
 }
 
@@ -606,8 +569,8 @@ print(f"Total Attack Knowledge: {len(capec_patterns) + len(mitre_patterns)} patt
 print(f"Document chunks: {len(docs)}")
 print(f"Vector database: ./vple_chroma_db")
 print()
-print("✓ RAG System Now Contains COMPLETE Attack Pattern Database")  
-print("✓ Red Team Agent Must Choose Techniques from Thousands of Options")
+print("✓ RAG System Now Contains COMPLETE Attack Pattern Database")
+print("✓ LLM Must Choose Techniques from Thousands of Options")
 print("✓ No Bias Toward Specific VPLE Techniques")
-print("✓ True Test of Autonomous Red Team Agent Capabilities")
+print("✓ True Test of LLM Red Team Agent Capabilities")
 print("\nNext: Run notebook 04_Test_RAG_System.ipynb to validate complete system")
