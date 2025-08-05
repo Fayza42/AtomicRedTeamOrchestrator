@@ -298,8 +298,8 @@ for i, pattern in enumerate(mitre_patterns):
 print(f"✓ Total documents created: {len(documents_content)}")
 
 # %%
-# Step 6: Add VPLE Target Information
-print("Adding VPLE target system information...")
+# Step 6: Add VPLE Target Information (Minimal and Unbiased)
+print("Adding minimal VPLE target system information...")
 
 # Minimal VPLE system information (not biased toward specific techniques)
 vple_system_info = """
@@ -340,18 +340,17 @@ ACCESS INFORMATION:
 # Add VPLE info to documents
 documents_content.append(vple_system_info)
 
+print(f"✓ Added VPLE target information")
 print(f"✓ Final document count: {len(documents_content)}")
 
-# Save documents to files for reference
-knowledge_files = {
-    "complete_attack_patterns.txt": '\n\n' + '='*80 + '\n\n'.join(documents_content)
-}
+# Optional: Save complete knowledge base for reference
+try:
+    with open("complete_attack_knowledge.txt", 'w', encoding='utf-8') as f:
+        f.write('\n\n' + '='*80 + '\n\n'.join(documents_content))
+    print("✓ Complete knowledge base saved to complete_attack_knowledge.txt")
+except Exception as e:
+    print(f"⚠ Could not save knowledge base file: {e}")
 
-for filename, content in knowledge_files.items():
-    file_path = knowledge_dir / filename
-    with open(file_path, 'w', encoding='utf-8') as f:
-        f.write(content)
-    print(f"✓ Saved: {filename}")
 
 # %%
 # Step 6: Write Knowledge Files
@@ -476,16 +475,16 @@ for doc_type, count in doc_types.items():
 print(f"\n✓ Total chunks ready for embeddings: {len(docs)}")
 
 # %%
-# Step 9: Create Vector Store
-print("Creating vector embeddings...")
+# Step 8: Create Vector Store with Complete Knowledge Base
+print("Creating vector store with complete CAPEC/MITRE knowledge...")
 
 try:
     # Initialize embeddings with the same model
     embeddings = OllamaEmbeddings(model=model_name)
     
-    # Create vector store
+    # Create vector store directly from our processed documents
     vectorstore = Chroma.from_documents(
-        documents=docs,
+        documents=docs,  # Use the docs we created in Step 7
         embedding=embeddings,
         persist_directory="./vple_chroma_db"
     )
@@ -493,46 +492,37 @@ try:
     print("✓ Vector store created successfully")
     print(f"✓ Stored {len(docs)} chunks in ChromaDB")
     
-    # Test similarity search
-    test_query = "web application vulnerabilities"
-    similar_docs = vectorstore.similarity_search(test_query, k=3)
+    # Test similarity search with Red Team queries
+    test_queries = [
+        "web application attack patterns",
+        "SQL injection techniques", 
+        "command execution methods",
+        "privilege escalation attacks"
+    ]
     
-    print(f"\nTest query: '{test_query}'")
-    print(f"Found {len(similar_docs)} similar documents")
-    print(f"Top result preview: {similar_docs[0].page_content[:150]}...")
+    print("\nTesting vector search with Red Team queries:")
+    for query in test_queries:
+        similar_docs = vectorstore.similarity_search(query, k=3)
+        doc_types = [doc.metadata.get("doc_type", "unknown") for doc in similar_docs]
+        print(f"  '{query}': Found {len(similar_docs)} docs, types: {set(doc_types)}")
     
 except Exception as e:
     print(f"✗ Vector store creation failed: {e}")
+    print("Check that Ollama is running and the model is available")
     exit(1)
 
 # %%
-# Step 10: Update Configuration with Complete Knowledge Base
+# Step 9: Update Configuration with Complete Knowledge Base
 config["rag_setup"] = {
     "knowledge_type": "Complete CAPEC + MITRE ATT&CK Database",
     "capec_patterns": len(capec_patterns),
-    "mitre_patterns": len(mitre_patterns),
+    "mitre_patterns": len(mitre_patterns), 
     "total_attack_patterns": len(capec_patterns) + len(mitre_patterns),
-    "knowledge_dir": str(knowledge_dir),
     "vector_db": "./vple_chroma_db", 
     "chunks_created": len(docs),
     "data_sources": ["CAPEC via STIX 2.x", "MITRE ATT&CK Enterprise", "VPLE System Info"],
-    "approach": "Unbiased complete database - LLM must choose techniques autonomously",
+    "approach": "Unbiased complete database - Red Team Agent must choose techniques autonomously",
     "setup_timestamp": datetime.now().isoformat()
 }
 
-with open("vple_config.json", "w") as f:
-    json.dump(config, f, indent=2)
 
-print("Complete CAPEC/MITRE Knowledge Base Setup Complete!")
-print("=" * 60)
-print(f"CAPEC Attack Patterns: {len(capec_patterns)}")
-print(f"MITRE ATT&CK Techniques: {len(mitre_patterns)}")
-print(f"Total Attack Knowledge: {len(capec_patterns) + len(mitre_patterns)} patterns")
-print(f"Document chunks: {len(docs)}")
-print(f"Vector database: ./vple_chroma_db")
-print()
-print("✓ RAG System Now Contains COMPLETE Attack Pattern Database")
-print("✓ LLM Must Choose Techniques from Thousands of Options")
-print("✓ No Bias Toward Specific VPLE Techniques")
-print("✓ True Test of LLM Red Team Agent Capabilities")
-print("\nNext: Run notebook 04_Test_RAG_System.ipynb to validate complete system")
