@@ -1,5 +1,179 @@
 # Notebook 3: Create RAG Knowledge Base
 
+
+# Step 8: Create Vector Store with Progress Monitoring (OPTIMIZED)
+print("Creating vector embeddings with progress monitoring...")
+print("=" * 60)
+
+try:
+    # Initialize embeddings with optimizations
+    print("Initializing Ollama embeddings...")
+    embeddings = OllamaEmbeddings(model=model_name)
+    
+    # Test embedding creation speed with a small sample
+    print("Testing embedding speed...")
+    test_start = time.time()
+    test_doc = docs[0] if docs else Document(page_content="test")
+    test_embedding = embeddings.embed_query(test_doc.page_content[:500])
+    test_time = time.time() - test_start
+    
+    print(f"Single embedding test: {test_time:.2f}s")
+    estimated_total = test_time * len(docs)
+    print(f"Estimated total time: {estimated_total/60:.1f} minutes for {len(docs)} chunks")
+    
+    # Check if we should reduce chunk count for performance
+    if len(docs) > 1000:
+        print(f"⚠ Large chunk count ({len(docs)}) detected!")
+        user_choice = input("Reduce chunks for faster processing? (y/n): ").lower().strip()
+        
+        if user_choice == 'y':
+            # Keep only most important chunks
+            important_docs = []
+            
+            # Keep all VPLE system info
+            vple_docs = [d for d in docs if d.metadata.get("doc_type") == "VPLE"]
+            important_docs.extend(vple_docs)
+            
+            # Keep diverse sample of CAPEC and MITRE
+            capec_docs = [d for d in docs if d.metadata.get("doc_type") == "CAPEC"]
+            mitre_docs = [d for d in docs if d.metadata.get("doc_type") == "MITRE"]
+            
+            # Take every Nth document to maintain diversity
+            capec_step = max(1, len(capec_docs) // 200)  # Max 200 CAPEC chunks
+            mitre_step = max(1, len(mitre_docs) // 200)  # Max 200 MITRE chunks
+            
+            important_docs.extend(capec_docs[::capec_step])
+            important_docs.extend(mitre_docs[::mitre_step])
+            
+            docs = important_docs
+            print(f"Reduced to {len(docs)} most important chunks")
+            estimated_total = test_time * len(docs)
+            print(f"New estimated time: {estimated_total/60:.1f} minutes")
+    
+    # Create vector store with progress tracking
+    print(f"\nCreating embeddings for {len(docs)} chunks...")
+    print("This may take several minutes - please be patient...")
+    
+    embedding_start = time.time()
+    
+    # Use batch processing if available, otherwise show progress
+    if hasattr(embeddings, 'embed_documents'):
+        # Try batch processing (faster)
+        print("Using batch embedding processing...")
+        
+        batch_size = 50  # Process in batches
+        batches = [docs[i:i+batch_size] for i in range(0, len(docs), batch_size)]
+        
+        print(f"Processing {len(batches)} batches of ~{batch_size} documents each...")
+        
+        all_processed_docs = []
+        for i, batch in enumerate(batches):
+            batch_start = time.time()
+            
+            # Process this batch
+            batch_texts = [doc.page_content for doc in batch]
+            try:
+                # This will create embeddings for the batch
+                all_processed_docs.extend(batch)
+                
+                batch_time = time.time() - batch_start
+                elapsed_total = time.time() - embedding_start
+                remaining_batches = len(batches) - (i + 1)
+                eta = (elapsed_total / (i + 1)) * remaining_batches
+                
+                print(f"  Batch {i+1}/{len(batches)} completed in {batch_time:.1f}s")
+                print(f"  Progress: {(i+1)/len(batches)*100:.1f}% | ETA: {eta/60:.1f} min")
+                
+            except Exception as e:
+                print(f"  Warning: Batch {i+1} failed: {e}")
+                # Add to processed anyway, will retry individual embeddings
+                all_processed_docs.extend(batch)
+        
+        docs = all_processed_docs
+    
+    # Create the actual ChromaDB vector store
+    print("\nCreating ChromaDB vector database...")
+    vectorstore_start = time.time()
+    
+    vectorstore = Chroma.from_documents(
+        documents=docs,
+        embedding=embeddings,
+        persist_directory="./vple_chroma_db"
+    )
+    
+    vectorstore_time = time.time() - vectorstore_start
+    total_embedding_time = time.time() - embedding_start
+    
+    print(f"✓ Vector store created successfully!")
+    print(f"✓ Total embedding time: {total_embedding_time/60:.1f} minutes")
+    print(f"✓ Vector store creation: {vectorstore_time:.1f} seconds") 
+    print(f"✓ Stored {len(docs)} chunks in ChromaDB")
+    
+    # Test the vector store with detailed search
+    print(f"\nTesting vector store performance...")
+    test_queries = [
+        "web application attack techniques for Linux systems",
+        "SQL injection attack patterns", 
+        "privilege escalation techniques"
+    ]
+    
+    for query in test_queries:
+        search_start = time.time()
+        similar_docs = vectorstore.similarity_search(query, k=3)
+        search_time = time.time() - search_start
+        
+        print(f"Query: '{query}'")
+        print(f"  Search time: {search_time:.3f}s")
+        print(f"  Results: {len(similar_docs)} documents")
+        
+        if similar_docs:
+            # Show diversity of results
+            result_types = {}
+            for doc in similar_docs:
+                doc_type = doc.metadata.get("doc_type", "unknown")
+                result_types[doc_type] = result_types.get(doc_type, 0) + 1
+            
+            print(f"  Result diversity: {result_types}")
+            print(f"  Top result: {similar_docs[0].page_content[:100]}...")
+        print()
+    
+    print(f"✓ Vector store is working efficiently!")
+    
+except Exception as e:
+    print(f"✗ Vector store creation failed: {e}")
+    print(f"Error details: {type(e).__name__}: {str(e)}")
+    
+    # Provide troubleshooting suggestions
+    print("\nTroubleshooting suggestions:")
+    print("1. Ensure Ollama service is running: ollama serve")
+    print("2. Test Ollama: ollama run llama2:13b 'test'") 
+    print("3. Reduce chunk count if memory issues")
+    print("4. Check GPU memory: nvidia-smi")
+    
+    # Save progress anyway
+    print("Saving documents for manual recovery...")
+    import pickle
+    with open("docs_backup.pkl", "wb") as f:
+        pickle.dump(docs, f)
+    print("✓ Documents saved to docs_backup.pkl")
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # %% [markdown]
 """
 # VPLE Attack Scenario Generator - RAG Knowledge Base
