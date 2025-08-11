@@ -1,3 +1,20 @@
-/tmp/ipykernel_769/3925814791.py:54: RuntimeWarning: coroutine 'Application.run_async' was never awaited
-  print(f"\n💥 Une erreur inattendue est survenue : {e}")
-RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+# --- Prompts de l'Agent ---
+EXTRACTION_PROMPT_TEMPLATE = """ROLE: Expert en cybersécurité.
+TACHE: Analyse cette documentation Vulhub et extrais les informations en JSON. Ne réponds rien d'autre que le JSON.
+CHAMPS: `ports_exposed` (list[int]), `cve_ids` (list[str]), `reproduction_commands` (list[str]), `success_indicators` (list[str]).
+
+DOC: {vulhub_doc}
+
+JSON:"""
+
+ANALYSIS_PROMPT_TEMPLATE = """ROLE: Analyste sécurité offensif.
+TACHE: Crée un rapport d'exploitation JSON en synthétisant les données. Ne réponds rien d'autre que le JSON.
+CHAMPS: `target_confirmed` (dict: `status`: bool, `reason`: str), `vulnerability_details` (dict: `cve`: str, `cvss_score`: str, `attack_vector`: str), `exploitation_plan` (dict: `primary_technique`: str, `commands_to_execute`: list[str], `success_criteria`: str), `next_steps_suggestion` (list[str]).
+
+DONNEES:
+- Doc extraite: {extracted_info}
+- Scan de ports: {scan_results}
+- Tests HTTP: {probe_results}
+- Données CVE: {cve_results}
+
+JSON:"""
