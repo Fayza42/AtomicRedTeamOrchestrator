@@ -1,0 +1,3 @@
+/tmp/ipykernel_769/3925814791.py:54: RuntimeWarning: coroutine 'Application.run_async' was never awaited
+  print(f"\n💥 Une erreur inattendue est survenue : {e}")
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
