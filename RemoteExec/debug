@@ -1,0 +1,272 @@
+🧪 DÉMONSTRATION - ENHANCED ANALYZER REMOTE
+============================================================
+🎯 Initialisation Enhanced Vulnerability Analyzer...
+  ✅ Base Vulhub connectée: ./vulhub_chroma_db
+  ✅ Enhanced Analyzer initialisé
+
+🔗 Configuration de la connexion distante...
+
+🔧 Configuration SSH pour accès machine hôte
+🔗 Initialisation SSH Manager pour 100.91.1.1
+🔐 Connexion SSH avec mot de passe
+✅ Connexion SSH établie vers 100.91.1.1
+🖥️ Commande hôte: echo 'SSH Test OK'
+  ✅ Succès (code 0)
+✅ Test SSH réussi: SSH Test OK
+🔍 Remote Reconnaissance Tools initialized
+✅ Connexion distante établie
+
+📦 Sélection du container cible...
+donnez l'id du container  94672c93e89b
+🎯 Container cible défini: 94672c93e89b
+🧪 Test de connectivité du container 94672c93e89b...
+🐳 Container 94672c93e89b: echo 'Container Test OK'
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'echo 'Container Test OK''
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: uname -a
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'uname -a'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which curl
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which curl'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which wget
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which wget'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which nmap
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which nmap'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which netstat
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which netstat'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which ss
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which ss'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: id
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'id'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: ls -la /
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ls -la /'
+  ✅ Succès (code 0)
+test terminés
+
+🎯 Analyse de: apache-cxf/CVE-2024-28752
+
+🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯
+🎯 ANALYSE ENHANCED AVEC EXÉCUTION DISTANTE
+🎯 VULHUB ID: apache-cxf/CVE-2024-28752
+🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯
+
+🔗 [1/6] Configuration connexion distante...
+
+🔗 Configuration de la connexion distante...
+
+🔧 Configuration SSH pour accès machine hôte
+🔗 Initialisation SSH Manager pour 100.91.1.1
+🔐 Connexion SSH avec mot de passe
+✅ Connexion SSH établie vers 100.91.1.1
+🖥️ Commande hôte: echo 'SSH Test OK'
+  ✅ Succès (code 0)
+✅ Test SSH réussi: SSH Test OK
+🔍 Remote Reconnaissance Tools initialized
+✅ Connexion distante établie
+
+📦 [2/6] Sélection du container cible...
+
+📦 Sélection du container cible...
+donnez l'id du container  94672c93e89b
+🎯 Container cible défini: 94672c93e89b
+🧪 Test de connectivité du container 94672c93e89b...
+🐳 Container 94672c93e89b: echo 'Container Test OK'
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'echo 'Container Test OK''
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: uname -a
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'uname -a'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which curl
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which curl'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which wget
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which wget'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which nmap
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which nmap'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which netstat
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which netstat'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: which ss
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which ss'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: id
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'id'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: ls -la /
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ls -la /'
+  ✅ Succès (code 0)
+test terminés
+
+🔍 [3/6] Reconnaissance distante...
+
+🔍 RECONNAISSANCE DISTANTE EN COURS...
+----------------------------------------
+🔍 [1/6] Scan Nmap...
+🔍 Scan nmap de 127.0.0.1 ports 1-1000
+🐳 Container 94672c93e89b: which nmap
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'which nmap'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: nmap -sT -O -sV 127.0.0.1 -p 1-1000
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'nmap -sT -O -sV 127.0.0.1 -p 1-1000'
+  ✅ Succès (code 0)
+  ✅ 0 ports ouverts trouvés
+  ✅ 0 ports ouverts: []
+🌐 [2/6] Analyse Netstat...
+🌐 Analyse netstat...
+🐳 Container 94672c93e89b: netstat -tuln
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'netstat -tuln'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: netstat -tun
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'netstat -tun'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: netstat -tulnp 2>/dev/null || netstat -tuln
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'netstat -tulnp 2>/dev/null || netstat -tuln'
+  ✅ Succès (code 0)
+  ✅ Analyse réseau terminée
+⚙️ [3/6] Scan des processus...
+⚙️ Analyse des processus...
+🐳 Container 94672c93e89b: ps aux
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ps aux'
+  ❌ Échec (code 127): /bin/bash: line 1: ps: command not found
+
+🐳 Container 94672c93e89b: ps -ef --forest
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ps -ef --forest'
+  ❌ Échec (code 127): /bin/bash: line 1: ps: command not found
+
+🐳 Container 94672c93e89b: top -b -n 1
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'top -b -n 1'
+  ❌ Échec (code 127): /bin/bash: line 1: top: command not found
+
+  ✅ Processus analysés
+🌐 [4/6] Découverte services web...
+🌐 Découverte web sur http://localhost
+🐳 Container 94672c93e89b: curl -s -I -m 5 http://localhost:80
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'curl -s -I -m 5 http://localhost:80'
+  ❌ Échec (code 7): 
+🐳 Container 94672c93e89b: curl -s -I -m 5 http://localhost:8080
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'curl -s -I -m 5 http://localhost:8080'
+  ✅ Succès (code 0)
+  ✅ Service trouvé sur port 8080
+🐳 Container 94672c93e89b: curl -s -I -m 5 http://localhost:8443
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'curl -s -I -m 5 http://localhost:8443'
+  ❌ Échec (code 7): 
+🐳 Container 94672c93e89b: curl -s -I -m 5 http://localhost:443
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'curl -s -I -m 5 http://localhost:443'
+  ❌ Échec (code 7): 
+🐳 Container 94672c93e89b: curl -s -I -m 5 http://localhost:3000
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'curl -s -I -m 5 http://localhost:3000'
+  ❌ Échec (code 7): 
+🐳 Container 94672c93e89b: curl -s -I -m 5 http://localhost:8000
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'curl -s -I -m 5 http://localhost:8000'
+  ❌ Échec (code 7): 
+🐳 Container 94672c93e89b: curl -s -I -m 5 http://localhost:8888
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'curl -s -I -m 5 http://localhost:8888'
+  ❌ Échec (code 7): 
+🐳 Container 94672c93e89b: curl -s -I -m 5 http://localhost:9000
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'curl -s -I -m 5 http://localhost:9000'
+  ❌ Échec (code 7): 
+  ✅ Services web: 1 ports accessibles
+📁 [5/6] Reconnaissance filesystem...
+📁 Reconnaissance filesystem...
+🐳 Container 94672c93e89b: ls -la /
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ls -la /'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: ls -la /home/ 2>/dev/null || echo 'No /home'
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ls -la /home/ 2>/dev/null || echo 'No /home''
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: ls -la /var/www/ 2>/dev/null || echo 'No /var/www'
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ls -la /var/www/ 2>/dev/null || echo 'No /var/www''
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: ls -la /etc/ | head -20
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ls -la /etc/ | head -20'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: ls -la /tmp/
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'ls -la /tmp/'
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: cat /proc/version 2>/dev/null || echo 'No /proc/version'
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'cat /proc/version 2>/dev/null || echo 'No /proc/version''
+  ✅ Succès (code 0)
+🐳 Container 94672c93e89b: cat /etc/passwd | head -10
+🖥️ Commande hôte: docker exec 94672c93e89b /bin/bash -c 'cat /etc/passwd | head -10'
+  ✅ Succès (code 0)
+  ✅ Filesystem analysé
+🐳 [6/6] Informations container...
+🔍 Inspection du container 94672c93e89b...
+🖥️ Commande hôte: docker inspect 94672c93e89b
+  ✅ Succès (code 0)
+  📋 Container: cve-2024-28752-cxf-1
+  🏷️ Image: vulhub/apache-cxf:3.2.14
+  🌐 IP: 
+  🔌 Ports: 1 exposés
+  ✅ Container: cve-2024-28752-cxf-1
+✅ Reconnaissance distante terminée
+
+📚 [4/6] Récupération documentation Vulhub...
+📚 Récupération documentation Vulhub: apache-cxf/CVE-2024-28752
+/tmp/ipykernel_6510/218638656.py:237: LangChainDeprecationWarning: The method `BaseRetriever.get_relevant_documents` was deprecated in langchain-core 0.1.46 and will be removed in 1.0. Use :meth:`~invoke` instead.
+  docs = self.retriever.get_relevant_documents(vulhub_id)
+  ✅ Documentation trouvée
+
+🧠 [5/6] Fusion intelligence + données réelles...
+🧠 Fusion documentation + données réelles...
+/tmp/ipykernel_6510/218638656.py:256: LangChainDeprecationWarning: The method `Chain.run` was deprecated in langchain 0.1.0 and will be removed in 1.0. Use :meth:`~invoke` instead.
+  raw_output = self.extraction_chain.run(
+  ⚠ Tentative 1 échouée: Failed to parse EnhancedVulhubInfo from completion null. Got: 1 validation error for EnhancedVulhubInfo
+  Input should be a valid dictionary or instance of EnhancedVulhubInfo [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+  ⚠ Tentative 2 échouée: Failed to parse EnhancedVulhubInfo from completion null. Got: 1 validation error for EnhancedVulhubInfo
+  Input should be a valid dictionary or instance of EnhancedVulhubInfo [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+  ⚠ Tentative 3 échouée: Failed to parse EnhancedVulhubInfo from completion null. Got: 1 validation error for EnhancedVulhubInfo
+  Input should be a valid dictionary or instance of EnhancedVulhubInfo [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+  🔄 Utilisation du fallback enhanced...
+
+📊 [6/6] Génération rapport enhanced...
+📊 Génération du rapport enhanced...
+  ❌ Erreur génération rapport: `dumps_kwargs` keyword arguments are no longer supported.
+
+✅ ANALYSE ENHANCED TERMINÉE
+⏱️ Temps d'exécution: 32.59 secondes
+🎯 Score de confiance: 0.80
+🔍 Ports réels détectés: 0
+🌐 Services web: 1
+🔌 Connexion SSH fermée
+
+🎉 ANALYSE ENHANCED RÉUSSIE!
+   ✅ Validation réelle: True
+   🎯 Confiance: 0.80
+/tmp/ipykernel_6510/218638656.py:321: PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  enhanced_vulhub_info=enhanced_info.json(indent=2),
+/tmp/ipykernel_6510/218638656.py:430: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  "enhanced_vulhub_info": enhanced_info.dict(),
+/tmp/ipykernel_6510/218638656.py:431: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  "enhanced_analysis_report": enhanced_report.dict(),
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Cell In[27], line 58
+     55     print(f"\n🎉 DÉMONSTRATION TERMINÉE")
+     57 if __name__ == "__main__":
+---> 58     demo_enhanced_analyzer()
+     60 print("\n🎯 ENHANCED VULNERABILITY ANALYZER READY!")
+     61 print("Capacités: SSH + Docker + Nmap + Reconnaissance réelle + Intelligence Pydantic")
+
+Cell In[27], line 43, in demo_enhanced_analyzer()
+     41 print(f"   ✅ Validation réelle: {enhanced_report['real_world_validation']}")
+     42 print(f"   🎯 Confiance: {enhanced_report['confidence_score']:.2f}")
+---> 43 print(f"   🔍 Surface d'attaque: {len(enhanced_report['attack_surface']['confirmed_ports'])} ports")
+     45 # Sauvegarde du rapport
+     46 report_file = f"enhanced_analysis_{selected_vulhub.replace('/', '_')}.json"
+
+KeyError: 'confirmed_ports'
