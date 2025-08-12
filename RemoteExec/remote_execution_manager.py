@@ -51,8 +51,8 @@ class SSHConfig:
     
     host: str = "100.91.1.1"
     port: int = 22
-    username: str = "root"  # Ou utilisateur avec accès Docker
-    password: str = None
+    username: str = "fayza"  # Ou utilisateur avec accès Docker
+    password: str = fayzac1r
     key_file: str = None
     timeout: int = 30
     
